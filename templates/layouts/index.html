@@ -2,9 +2,47 @@
 <html>
 
 <head>
+    <style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create three equal columns that floats next to each other */
+
+.column {
+  float: left;
+  width: 33%;
+  padding: 10px;
+  height: 300px;
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+
+</style>
 </head>
 
 <body>
+
+<!--Three Column Layout-->
+
+    <div class="row">
+      <div class="column" style="background-color:#BFEFFF;">
+        <h2>This Month Revenue</h2>
+        <h1 id="card1"></h1>
+      </div>
+      <div class="column" style="background-color:#838EDE;">
+        <h2>Last Month Revenue</h2>
+        <h1 id="card2"></h1>
+      </div>
+
+    </div>
+
 
     {% for id in ids %}
         <h3>{{id}}</h3>
@@ -20,9 +58,22 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <!-- Plotly.js -->
-    <script src="https://d14fo0winaifog.cloudfront.net/plotly-basic.js"></script>
+<!--    <script src="https://d14fo0winaifog.cloudfront.net/plotly-basic.js"></script>-->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+
 
     <script type="text/javascript">
+        var card1 = {{ cards[0] }};
+        var card2 = {{ cards[1] }};
+
+        window.onload = function() {
+            //when the document is finished loading, replace everything
+            document.getElementById("card1").innerHTML=card1;
+            document.getElementById("card2").innerHTML=card2;
+        }
+
+
 
         var graphs = {{graphJSON | safe}};
         var ids = {{ids | safe}};

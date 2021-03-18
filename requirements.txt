@@ -1,3 +1,6 @@
 plotly
 flask
 pandas
+psycopg2
+dash-bootstrap-components
+dash
